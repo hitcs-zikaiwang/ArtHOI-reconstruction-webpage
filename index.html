@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ArtHOI: Monocular 4D Hand-Articulated-Object Interaction</title>
+
+    <meta name="description"
+        content="ArtHOI reconstructs 4D hand-articulated-object interactions from a single monocular video by integrating and refining priors from multiple foundation models." />
+    <meta property="og:title" content="ArtHOI: Monocular 4D Hand-Articulated-Object Interaction" />
+    <meta property="og:description"
+        content="ArtHOI reconstructs 4D hand-articulated-object interactions from a single monocular video by integrating and refining priors from multiple foundation models." />
+    <meta property="og:image" content="http://www.example.com/data/arthoi_preview.jpg" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ArtHOI: Monocular 4D Hand-Articulated-Object Interaction" />
+    <meta name="twitter:description"
+        content="ArtHOI reconstructs 4D hand-articulated-object interactions from a single monocular video by integrating and refining priors from multiple foundation models." />
+    <meta name="twitter:image" content="http://www.example.com/data/arthoi_preview.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&family=Noto+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap"
+        rel="stylesheet" />
+
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="data/favicon.png" rel="shortcut icon" type="image/x-icon" />
+</head>
+
+<body>
+    <main class="cvpr-page">
+        <header class="hero section">
+            <p class="venue">CVPR 2026 Submission</p>
+            <h1 class="paper-title">
+                <span class="title-line1"><span class="title-emoji" aria-hidden="true">🧑‍🔧</span><span class="title-brand">ArtHOI</span><span class="title-sep">:</span> Taming Foundation Models for Monocular 4D Reconstruction of</span>
+                <span class="title-line2"><span class="title-hao">Hand-Articulated-Object</span> Interactions</span>
+            </h1>
+            <!-- <p class="paper-subtitle">4D hand-object reconstruction for articulated interactions, using monocular video without any pre-scanning. </p> -->
+            <p class="title-tags" aria-label="theme tags">
+                <span class="title-tag">🎬 Single Monocular Video</span>
+                <span class="title-tag">👐 Hand-Object Interaction</span>
+                <span class="title-tag">✂️ Articulated Objects</span>
+            </p>
+
+            <p class="authors">
+                <span>Zikai Wang<sup class="author-mark">1</sup></span>,
+                <span>Zhilu Zhang<sup class="author-mark">1,✉</sup></span>,
+                <span>Yiqing Wang<sup class="author-mark">2</sup></span>,
+                <span>Hui Li<sup class="author-mark">1</sup></span>,
+                <span>Wangmeng Zuo<sup class="author-mark">1</sup></span>
+            </p>
+            <p class="affiliations">
+                <sup class="author-mark">1</sup>Harbin Institute of Technology
+                &ensp;
+                <sup class="author-mark">2</sup>Shanghai Jiao Tong University
+            </p>
+            <p class="author-email">
+                Zikai Wang: <a href="mailto:cs-zikaiwang@outlook.com">cs-zikaiwang@outlook.com</a>
+                &ensp;·&ensp;
+                <sup class="author-mark">✉</sup> Zhilu Zhang: <a href="mailto:cszlzhang@outlook.com">cszlzhang@outlook.com</a>
+            </p>
+
+            <div class="links-row">
+                <a class="link-btn" href="" target="_blank" rel="noopener noreferrer">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    Paper (Coming Soon)
+                </a>
+                <a class="link-btn" href="" target="_blank" rel="noopener noreferrer">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                    Code (Coming Soon)
+                </a>
+                <a class="link-btn" href="" target="_blank" rel="noopener noreferrer">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                    Data (Coming Soon)
+                </a>
+            </div>
+        </header>
+
+        <section class="section teaser-section">
+            <div class="media-frame teaser-frame">
+                <img src="data/teaser.png" alt="ArtHOI teaser: given a monocular RGB video of hands interacting with an unknown articulated object, ArtHOI reconstructs 4D hand-object interactions without any pre-defined object templates or multi-view scan initialization." />
+            </div>
+            <p class="caption">Given a monocular RGB video sequence of hands interacting with an unknown articulated object, ArtHOI reconstructs 4D hand-object interactions without any pre-defined object templates or multi-view scan initialization.</p>
+        </section>
+
+        <section class="section abstract-section">
+            <h2 class="section-title">Abstract</h2>
+            <p>
+                Existing hand-object interaction methods are largely limited to rigid objects, while articulated-object 4D reconstruction often requires pre-scanning or
+                multi-view videos. ArtHOI addresses this gap with an optimization-based framework that integrates and refines priors from multiple foundation models.
+                We propose Adaptive Sampling Refinement (ASR) to estimate metric object scale and pose from normalized image-to-3D outputs, and an MLLM-guided
+                hand-object alignment strategy that uses contact reasoning as optimization constraints. We also introduce ArtHOI-RGBD and ArtHOI-Wild for evaluation
+                on both controlled and in-the-wild articulated interactions.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Method Overview</h2>
+
+            <p class="method-lead">
+                ArtHOI reconstructs 4D hand-articulated-object interactions from a single monocular video,
+                with no pre-scanned object or multi-view setup.
+                It coordinates priors from multiple foundation models while resolving their two key failure modes:
+                (1) prior misalignment, especially in metric scale and geometry, and (2) hand-object misalignment that violates physical contact.
+            </p>
+            
+            <div class="media-frame method-figure">
+                <img src="data/pipeline.png" alt="ArtHOI pipeline: optimization-based framework integrating multiple foundation model priors" />
+                <p class="caption method-caption">Pipeline of ArtHOI — an optimization-based framework (a) that integrates and refines priors from multiple foundation models. The proposed ASR method (b) recovers metric-scale 3D mesh in world space from a normalized one; MLLM-guided hand-object alignment (c) promotes physically plausible HOI mesh composition.</p>
+            </div>
+            <div>
+                <!-- spaces --->
+                <p style="height: 24px;"></p>
+            </div>
+
+            <div class="idea-grid">
+                <div class="idea-card">
+                    <div class="idea-num">①</div>
+                    <div class="idea-body">
+                        <h3 class="idea-title">Foundation Model Preprocessing</h3>
+                        <p>SAM2 segments the object and hand; Video-Depth-Anything estimates metric depth and camera intrinsics.
+                        DiffuEraser inpaints the human region to isolate the object.
+                        HunYuan3D then reconstructs the object's 3D mesh from the clean canonical frame.</p>
+                    </div>
+                </div>
+
+                <div class="idea-card idea-card--highlight">
+                    <div class="idea-num">②</div>
+                    <div class="idea-body">
+                        <h3 class="idea-title">ASR: Metric Scale &amp; Pose Estimation</h3>
+                        <p>Image-to-3D models output <em>normalized</em> meshes with no real-world scale.
+                        <strong>Adaptive Sampling Refinement (ASR)</strong> iteratively samples candidate scales, queries FoundationPose for a pose at each scale, and scores hypotheses by silhouette matching against the object mask.
+                        This robustly grounds the mesh in metric world space.</p>
+                    </div>
+                </div>
+
+                <div class="idea-card">
+                    <div class="idea-num">③</div>
+                    <div class="idea-body">
+                        <h3 class="idea-title">Part-wise Motion Reconstruction</h3>
+                        <p>PartField partitions the canonical mesh into parts; CoTracker3 tracks them across the inpainted video and lifts tracks to 3D via depth.
+                        Per-part SE(3) motions are optimized with a visibility-aware tracking loss and a temporal smoothness term.
+                        This handles part-part and hand-part occlusions that defeat texture-matching baselines.</p>
+                    </div>
+                </div>
+
+                <div class="idea-card idea-card--highlight">
+                    <div class="idea-num">④</div>
+                    <div class="idea-body">
+                        <h3 class="idea-title">MLLM-Guided Hand-Object Alignment</h3>
+                        <p>Independently reconstructed hands (WiLoR) and objects misalign in scale and position.
+                        An MLLM (Qwen-VL) is prompted with camera-perspective cues, neighboring frames, and colorized depth to infer per-frame contact states and contacting fingers.
+                        These labels drive a two-stage optimization that aligns object scale to the hand, then refines hand pose to achieve physically plausible contact.</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Results Gallery</h2>
+            <p class="section-intro">Reconstructed 4D hand-articulated-object interactions across ArtHOI-RGBD, RSRD, and ArtHOI-Wild sources.</p>
+            
+            <div class="media-frame results-full" style="margin-top:18px;">
+                <img src="data/main_results_ho.png" alt="Main HOI reconstruction results across ArtHOI-RGBD, RSRD, and ArtHOI-Wild" />
+                <p class="caption" style="margin-top:10px;">Qualitative results across three data sources. The first column shows sampled input frames; camera-view and side-view HOI meshes are shown per result. Hand reconstructions for RSRD use the same WiLoR model for fair comparison. RSRD cannot process ArtHOI-Wild videos, as it requires an object scan unavailable for internet footage.</p>
+            </div>
+            
+            <div class="carousel-wrap">
+                <button class="carousel-btn carousel-btn--prev" aria-label="Previous" onclick="scrollCarousel(this,-1)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <div class="video-carousel" id="videoCarousel">
+                    <article class="carousel-card">
+                        <video autoplay muted loop playsinline>
+                            <source src="data/teaser_vid_rs_scissor.mp4" type="video/mp4" />
+                        </video>
+                        <p class="carousel-label">ArtHOI-RGBD: Scissors</p>
+                    </article>
+                    <article class="carousel-card">
+                        <video autoplay muted loop playsinline>
+                            <source src="data/teaser_vid_rs_stapler.mp4" type="video/mp4" />
+                        </video>
+                        <p class="carousel-label">ArtHOI-RGBD: Stapler</p>
+                    </article>
+                    <article class="carousel-card">
+                        <video autoplay muted loop playsinline>
+                            <source src="data/teaser_vid_rs_cddrive2.mp4" type="video/mp4" />
+                        </video>
+                        <p class="carousel-label">RSRD: CD Drive</p>
+                    </article>
+                    <article class="carousel-card">
+                        <video autoplay muted loop playsinline>
+                            <source src="data/teaser_vid_rs_headphone1.mp4" type="video/mp4" />
+                        </video>
+                        <p class="carousel-label">ArtHOI-Wild: Headphones</p>
+                    </article>
+                </div>
+                <button class="carousel-btn carousel-btn--next" aria-label="Next" onclick="scrollCarousel(this,1)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Quantitative Results</h2>
+            <p class="section-intro">We evaluate ArtHOI on three aspects: articulated object reconstruction accuracy, hand-object alignment quality, and MLLM contact reasoning accuracy.</p>
+
+            <div class="quant-grid">
+                <figure class="quant-item">
+                    <div class="media-frame table-frame">
+                        <img src="data/table_ArtHOI_RGBD_v1.png" alt="4D reconstruction accuracy on ArtHOI-RGBD" />
+                    </div>
+                    <figcaption class="caption"><strong>4D Reconstruction on ArtHOI-RGBD.</strong> CD, MSSD, and F-scores (5/10 mm) comparing ArtHOI vs. RSRD across five object sequences. ArtHOI achieves consistently lower reconstruction errors, especially on challenging cases (Stapler, CD Drive) with heavy hand-part occlusions.</figcaption>
+                </figure>
+
+                <figure class="quant-item">
+                    <div class="media-frame table-frame">
+                        <img src="data/table_RSRD_v1.png" alt="4D reconstruction accuracy on RSRD dataset" />
+                    </div>
+                    <figcaption class="caption"><strong>4D Reconstruction on RSRD.</strong> Results on monocular RGB videos from the RSRD dataset. ArtHOI achieves comparable or better reconstruction quality without requiring any pre-scanned object, and additionally handles ArtHOI-Wild videos where RSRD fails entirely.</figcaption>
+                </figure>
+
+                <figure class="quant-item">
+                    <div class="media-frame table-frame">
+                        <img src="data/table_HOAlign.png" alt="HOI alignment Co² scores" />
+                    </div>
+                    <figcaption class="caption"><strong>HOI Alignment Quality (Co² Score).</strong> Collision-Contact scores across ArtHOI-RGBD, RSRD, and ArtHOI-Wild. Our MLLM-guided alignment achieves the lowest Co² scores, outperforming unaligned outputs and RSRD&nbsp;+&nbsp;WiLoR baselines on all three sources. Lower is better.</figcaption>
+                </figure>
+
+                <figure class="quant-item">
+                    <div class="media-frame table-frame">
+                        <img src="data/table_ARCTIC_v1.png" alt="Comparison on ARCTIC dataset" />
+                    </div>
+                    <figcaption class="caption"><strong>Generalization to ARCTIC.</strong> Comparison against EasyHOI and RSRD on the ARCTIC dataset (Mixer, Box, Scissors). RSRD fails to reconstruct articulated objects; EasyHOI fails on &gt;10% of frames. ArtHOI achieves the best CD, MSSD, F10, contact accuracy, and finger accuracy across all three sequences.</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="section bibtex-section">
+            <h2 class="section-title">Citation</h2>
+            <p class="section-intro">If you find ArtHOI useful for your research, please consider citing our paper:</p>
+            <br/>
+            <!-- <pre class="bibtex">@inproceedings{anonymous2026arthoi,
+  title={ArtHOI: Taming Foundation Models for Monocular 4D Reconstruction of Hand-Articulated-Object Interactions},
+  author={Anonymous Author},
+  booktitle={CVPR},
+  year={2026}
+}</pre> -->
+            <pre class="bibtex">TBD</pre>
+        </section>
+
+        <footer class="footer section">
+            <p>This page is intentionally kept minimal and academic-style. Replace placeholder media and links with final release assets.</p>
+        </footer>
+    </main>
+</body>
+
+</html>
+
+<script>
+(function(){
+    const carousel = document.getElementById('videoCarousel');
+    let timer;
+
+    function advance() {
+        const card = carousel.querySelector('.carousel-card');
+        const gap = parseInt(getComputedStyle(carousel).gap) || 16;
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+        if (carousel.scrollLeft >= maxScroll - 4) {
+            carousel.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+            carousel.scrollBy({ left: card.offsetWidth + gap, behavior: 'smooth' });
+        }
+    }
+
+    function start() { timer = setInterval(advance, 3500); }
+    function stop()  { clearInterval(timer); }
+
+    carousel.addEventListener('mouseenter', stop);
+    carousel.addEventListener('mouseleave', start);
+    carousel.addEventListener('touchstart', stop, { passive: true });
+    carousel.addEventListener('touchend',   () => setTimeout(start, 2000), { passive: true });
+
+    start();
+
+    window.scrollCarousel = function(btn, dir) {
+        stop();
+        const card = carousel.querySelector('.carousel-card');
+        const gap = parseInt(getComputedStyle(carousel).gap) || 16;
+        carousel.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: 'smooth' });
+        setTimeout(start, 3500);
+    };
+})();
+</script>
