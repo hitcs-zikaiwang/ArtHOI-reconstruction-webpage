@@ -87,12 +87,23 @@
 
         <section class="section abstract-section">
             <h2 class="section-title">Abstract</h2>
-            <p>
-                Existing hand-object interaction methods are largely limited to rigid objects, while articulated-object 4D reconstruction often requires pre-scanning or
-                multi-view videos. ArtHOI addresses this gap with an optimization-based framework that integrates and refines priors from multiple foundation models.
-                We propose Adaptive Sampling Refinement (ASR) to estimate metric object scale and pose from normalized image-to-3D outputs, and an MLLM-guided
-                hand-object alignment strategy that uses contact reasoning as optimization constraints. We also introduce ArtHOI-RGBD and ArtHOI-Wild for evaluation
-                on both controlled and in-the-wild articulated interactions.
+            <p style="font-size: 0.95em;">
+                Existing hand-object interactions (HOI) methods are largely limited to rigid objects, 
+                while 4D reconstruction methods of articulated objects generally require pre-scanning 
+                the object or even multi-view videos. It remains an unexplored but significant challenge 
+                to reconstruct 4D human-articulated-object interactions from a single monocular RGB video. 
+                Fortunately, recent advancements in foundation models present a new opportunity to address 
+                this highly ill-posed problem. To this end, we introduce ArtHOI, an optimization-based 
+                framework that integrates and refines priors from multiple foundation models. 
+                Our key contribution is a suite of novel methodologies designed to resolve the inherent 
+                inaccuracies and physical unreality of these priors. In particular, 
+                we introduce an Adaptive Sampling Refinement (ASR) method to optimize object's metric 
+                scale and pose for grounding its normalized mesh in world space. Furthermore, we propose
+                 a Multimodal Large Language Model (MLLM) guided hand-object alignment method, utilizing 
+                 contact reasoning information as constraints of hand-object mesh composition optimization. 
+                 To facilitate a comprehensive evaluation, we also contribute two new datasets, ArtHOI-RGBD 
+                 and ArtHOI-Wild. Extensive experiments validate the robustness and effectiveness of our 
+                 ArtHOI across diverse objects and interactions.
             </p>
         </section>
 
@@ -103,7 +114,7 @@
                 ArtHOI reconstructs 4D hand-articulated-object interactions from a single monocular video,
                 with no pre-scanned object or multi-view setup.
                 It coordinates priors from multiple foundation models while resolving their two key failure modes:
-                (1) prior misalignment, especially in metric scale and geometry, and (2) hand-object misalignment that violates physical contact.
+                (1) prior misalignment, especially in metric scale and geometry, and (2) hand-object misalignment occurs in complicated interactions.
             </p>
             
             <div class="media-frame method-figure">
@@ -117,42 +128,42 @@
 
             <div class="idea-grid">
                 <div class="idea-card">
-                    <div class="idea-num">①</div>
+                    <div class="idea-num">1</div>
                     <div class="idea-body">
                         <h3 class="idea-title">Foundation Model Preprocessing</h3>
-                        <p>SAM2 segments the object and hand; Video-Depth-Anything estimates metric depth and camera intrinsics.
+                        <p>SAM2 segments the object and hand; Video-Depth-Anything and UniDepthV2 estimates metric depth and camera intrinsics.
                         DiffuEraser inpaints the human region to isolate the object.
                         HunYuan3D then reconstructs the object's 3D mesh from the clean canonical frame.</p>
                     </div>
                 </div>
 
                 <div class="idea-card idea-card--highlight">
-                    <div class="idea-num">②</div>
+                    <div class="idea-num">2</div>
                     <div class="idea-body">
                         <h3 class="idea-title">ASR: Metric Scale &amp; Pose Estimation</h3>
                         <p>Image-to-3D models output <em>normalized</em> meshes with no real-world scale.
-                        <strong>Adaptive Sampling Refinement (ASR)</strong> iteratively samples candidate scales, queries FoundationPose for a pose at each scale, and scores hypotheses by silhouette matching against the object mask.
+                        <strong>Adaptive Sampling Refinement (ASR)</strong> iteratively samples candidate scales, queries FoundationPose for a pose at each scale, 
+                        and scores hypotheses by silhouette matching against the object mask.
                         This robustly grounds the mesh in metric world space.</p>
                     </div>
                 </div>
 
                 <div class="idea-card">
-                    <div class="idea-num">③</div>
+                    <div class="idea-num">3</div>
                     <div class="idea-body">
                         <h3 class="idea-title">Part-wise Motion Reconstruction</h3>
-                        <p>PartField partitions the canonical mesh into parts; CoTracker3 tracks them across the inpainted video and lifts tracks to 3D via depth.
-                        Per-part SE(3) motions are optimized with a visibility-aware tracking loss and a temporal smoothness term.
-                        This handles part-part and hand-part occlusions that defeat texture-matching baselines.</p>
+                        <p>PartField partitions the canonical mesh into parts; CoTracker3 tracks them across the inpainted video and lifts tracks to 3D via estimated depth.
+                        Per-part SE(3) motions are optimized with a visibility-aware tracking loss, which handles part-part and hand-part occlusions .</p>
                     </div>
                 </div>
 
                 <div class="idea-card idea-card--highlight">
-                    <div class="idea-num">④</div>
+                    <div class="idea-num">4</div>
                     <div class="idea-body">
                         <h3 class="idea-title">MLLM-Guided Hand-Object Alignment</h3>
                         <p>Independently reconstructed hands (WiLoR) and objects misalign in scale and position.
-                        An MLLM (Qwen-VL) is prompted with camera-perspective cues, neighboring frames, and colorized depth to infer per-frame contact states and contacting fingers.
-                        These labels drive a two-stage optimization that aligns object scale to the hand, then refines hand pose to achieve physically plausible contact.</p>
+                        An MLLM (Qwen-VL-Max) is prompted with camera-perspective cues, neighboring frames, and colorized depth to infer per-frame contact states and contacting fingers.
+                        These labels drive a two-stage optimization that aligns object scale to the hand, then refines hand pose to achieve coordinated 4D articulated HOI reconstruction.</p>
                     </div>
                 </div>
             </div>
@@ -189,13 +200,13 @@
                         <video autoplay muted loop playsinline>
                             <source src="data/teaser_vid_rs_cddrive2.mp4" type="video/mp4" />
                         </video>
-                        <p class="carousel-label">RSRD: CD Drive</p>
+                        <p class="carousel-label">ArtHOI-RGBD: CD Drive</p>
                     </article>
                     <article class="carousel-card">
                         <video autoplay muted loop playsinline>
                             <source src="data/teaser_vid_rs_headphone1.mp4" type="video/mp4" />
                         </video>
-                        <p class="carousel-label">ArtHOI-Wild: Headphones</p>
+                        <p class="carousel-label">ArtHOI-RGBD: Headphones</p>
                     </article>
                 </div>
                 <button class="carousel-btn carousel-btn--next" aria-label="Next" onclick="scrollCarousel(this,1)">
