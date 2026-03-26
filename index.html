@@ -81,18 +81,10 @@
         <section class="section teaser-section">
             <div class="teaser-grid-wrap" id="teaserWrap">
                 <div class="teaser-grid" id="teaserGrid">
-                    <video class="teaser-vid" autoplay muted playsinline>
-                        <source src="data/video/itw_cddrive_merge.mp4" type="video/mp4" />
-                    </video>
-                    <video class="teaser-vid" autoplay muted playsinline>
-                        <source src="data/video/rs_stapler2_merge.mp4" type="video/mp4" />
-                    </video>
-                    <video class="teaser-vid" autoplay muted playsinline>
-                        <source src="data/video/rsrd_nerfgun_2x_merge.mp4" type="video/mp4" />
-                    </video>
-                    <video class="teaser-vid" autoplay muted playsinline>
-                        <source src="data/video/ytb_waffle2_2x_merged.mp4" type="video/mp4" />
-                    </video>
+                    <video class="teaser-vid" src="data/video/itw_cddrive_merge.mp4" autoplay muted playsinline></video>
+                    <video class="teaser-vid" src="data/video/rs_stapler2_merge.mp4" autoplay muted playsinline></video>
+                    <video class="teaser-vid" src="data/video/rsrd_nerfgun_2x_merge.mp4" autoplay muted playsinline></video>
+                    <video class="teaser-vid" src="data/video/ytb_waffle2_2x_merged.mp4" autoplay muted playsinline></video>
                 </div>
                 <div class="teaser-pause-icon" id="teaserPauseIcon" aria-hidden="true">
                     <svg id="teaserIconSvg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"></svg>
@@ -210,27 +202,19 @@
                 </button>
                 <div class="video-carousel" id="videoCarousel">
                     <article class="carousel-card">
-                        <video autoplay muted loop playsinline>
-                            <source src="data/video/rs_scissor_compo.mp4" type="video/mp4" />
-                        </video>
+                        <video src="data/video/rs_scissor_compo.mp4" autoplay muted loop playsinline></video>
                         <p class="carousel-label">ArtHOI-RGBD: Scissors</p>
                     </article>
                     <article class="carousel-card">
-                        <video autoplay muted loop playsinline>
-                            <source src="data/video/rs_stapler2_compo.mp4" type="video/mp4" />
-                        </video>
+                        <video src="data/video/rs_stapler2_compo.mp4" autoplay muted loop playsinline></video>
                         <p class="carousel-label">ArtHOI-RGBD: Stapler</p>
                     </article>
                     <article class="carousel-card">
-                        <video autoplay muted loop playsinline>
-                            <source src="data/video/rs_cddrive2_compo.mp4" type="video/mp4" />
-                        </video>
+                        <video src="data/video/rs_cddrive2_compo.mp4" autoplay muted loop playsinline></video>
                         <p class="carousel-label">ArtHOI-RGBD: CD Drive</p>
                     </article>
                     <article class="carousel-card">
-                        <video autoplay muted loop playsinline>
-                            <source src="data/video/rs_headphone1_compo.mp4" type="video/mp4" />
-                        </video>
+                        <video src="data/video/rs_headphone1_compo.mp4" autoplay muted loop playsinline></video>
                         <p class="carousel-label">ArtHOI-RGBD: Headphones</p>
                     </article>
                 </div>
@@ -384,7 +368,7 @@
     vids.forEach(function (v) {
         v.addEventListener('ended', function () {
             setTimeout(function () {
-                if (!paused) { v.currentTime = 0; v.play(); }
+                if (!paused) { v.currentTime = 0; var p = v.play(); if (p && p.catch) p.catch(function(){}); }
             }, LOOP_GAP_MS);
         });
     });
