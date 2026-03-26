@@ -79,8 +79,33 @@
         </header>
 
         <section class="section teaser-section">
-            <div class="media-frame teaser-frame">
-                <img src="data/teaser.png" alt="ArtHOI teaser: given a monocular RGB video of hands interacting with an unknown articulated object, ArtHOI reconstructs 4D hand-object interactions without any pre-defined object templates or multi-view scan initialization." />
+            <div class="teaser-grid-wrap" id="teaserWrap">
+                <div class="teaser-grid" id="teaserGrid">
+                    <video class="teaser-vid" autoplay muted playsinline>
+                        <source src="data/video/itw_cddrive_merge.mp4" type="video/mp4" />
+                    </video>
+                    <video class="teaser-vid" autoplay muted playsinline>
+                        <source src="data/video/rs_stapler2_merge.mp4" type="video/mp4" />
+                    </video>
+                    <video class="teaser-vid" autoplay muted playsinline>
+                        <source src="data/video/rsrd_nerfgun_2x_merge.mp4" type="video/mp4" />
+                    </video>
+                    <video class="teaser-vid" autoplay muted playsinline>
+                        <source src="data/video/ytb_waffle2_2x_merged.mp4" type="video/mp4" />
+                    </video>
+                </div>
+                <div class="teaser-pause-icon" id="teaserPauseIcon" aria-hidden="true">
+                    <svg id="teaserIconSvg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"></svg>
+                </div>
+                <button class="teaser-nav teaser-nav--prev" id="teaserPrev" aria-label="Previous">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <button class="teaser-nav teaser-nav--next" id="teaserNext" aria-label="Next">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+            </div>
+            <div class="teaser-controls">
+                <button class="teaser-speed-btn" id="teaserSpeedBtn" aria-label="Playback speed">1×</button>
             </div>
             <p class="caption">Given a monocular RGB video sequence of hands interacting with an unknown articulated object, ArtHOI reconstructs 4D hand-object interactions without any pre-defined object templates or multi-view scan initialization.</p>
         </section>
@@ -186,25 +211,25 @@
                 <div class="video-carousel" id="videoCarousel">
                     <article class="carousel-card">
                         <video autoplay muted loop playsinline>
-                            <source src="data/teaser_vid_rs_scissor.mp4" type="video/mp4" />
+                            <source src="data/video/rs_scissor_compo.mp4" type="video/mp4" />
                         </video>
                         <p class="carousel-label">ArtHOI-RGBD: Scissors</p>
                     </article>
                     <article class="carousel-card">
                         <video autoplay muted loop playsinline>
-                            <source src="data/teaser_vid_rs_stapler.mp4" type="video/mp4" />
+                            <source src="data/video/rs_stapler2_compo.mp4" type="video/mp4" />
                         </video>
                         <p class="carousel-label">ArtHOI-RGBD: Stapler</p>
                     </article>
                     <article class="carousel-card">
                         <video autoplay muted loop playsinline>
-                            <source src="data/teaser_vid_rs_cddrive2.mp4" type="video/mp4" />
+                            <source src="data/video/rs_cddrive2_compo.mp4" type="video/mp4" />
                         </video>
                         <p class="carousel-label">ArtHOI-RGBD: CD Drive</p>
                     </article>
                     <article class="carousel-card">
                         <video autoplay muted loop playsinline>
-                            <source src="data/teaser_vid_rs_headphone1.mp4" type="video/mp4" />
+                            <source src="data/video/rs_headphone1_compo.mp4" type="video/mp4" />
                         </video>
                         <p class="carousel-label">ArtHOI-RGBD: Headphones</p>
                     </article>
@@ -309,12 +334,17 @@
         scrollToIndex(nextIndex);
     }
 
+    const DWELL_MS = 240;
+
     function start() {
         stop();
-        timer = setInterval(advance, AUTOPLAY_MS);
+        timer = setTimeout(function go() {
+            advance();
+            timer = setTimeout(go, AUTOPLAY_MS + ANIM_LOCK_MS + DWELL_MS);
+        }, AUTOPLAY_MS);
     }
 
-    function stop()  { clearInterval(timer); }
+    function stop() { clearTimeout(timer); }
 
     carousel.addEventListener('mouseenter', stop);
     carousel.addEventListener('mouseleave', start);
@@ -333,5 +363,76 @@
         scrollToIndex(nextIndex);
         setTimeout(start, AUTOPLAY_MS);
     };
+})();
+</script>
+
+<script>
+(function () {
+    var wrap = document.getElementById('teaserWrap');
+    var grid = document.getElementById('teaserGrid');
+    var iconEl = document.getElementById('teaserPauseIcon');
+    var iconSvg = document.getElementById('teaserIconSvg');
+    var prevBtn = document.getElementById('teaserPrev');
+    var nextBtn = document.getElementById('teaserNext');
+    if (!grid) return;
+
+    var vids = Array.prototype.slice.call(grid.querySelectorAll('.teaser-vid'));
+    var paused = false;
+    var iconTimer;
+    var LOOP_GAP_MS = 560;
+
+    vids.forEach(function (v) {
+        v.addEventListener('ended', function () {
+            setTimeout(function () {
+                if (!paused) { v.currentTime = 0; v.play(); }
+            }, LOOP_GAP_MS);
+        });
+    });
+
+    function showIcon(path) {
+        if (!iconEl || !iconSvg) return;
+        iconSvg.innerHTML = path;
+        iconEl.classList.add('visible');
+        clearTimeout(iconTimer);
+        iconTimer = setTimeout(function () { iconEl.classList.remove('visible'); }, 900);
+    }
+
+    if (wrap) {
+        wrap.addEventListener('click', function () {
+            if (window.innerWidth <= 640) return;
+            paused = !paused;
+            vids.forEach(function (v) {
+                if (paused) { v.pause(); } else { if (v.ended) v.currentTime = 0; v.play(); }
+            });
+            showIcon(paused
+                ? '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>'
+                : '<polygon points="5 3 19 12 5 21 5 3"/>');
+        });
+    }
+
+    function mobileNav(dir) {
+        var w = grid.offsetWidth;
+        if (!w) return;
+        var cur = Math.round(grid.scrollLeft / w);
+        var next = ((cur + dir) % vids.length + vids.length) % vids.length;
+        grid.scrollTo({ left: next * w, behavior: 'smooth' });
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', function (e) { e.stopPropagation(); mobileNav(-1); });
+    if (nextBtn) nextBtn.addEventListener('click', function (e) { e.stopPropagation(); mobileNav(1); });
+
+    var speedBtn = document.getElementById('teaserSpeedBtn');
+    var speedSteps = [1, 0.5];
+    var speedLabels = ['1×', '½×'];
+    var speedIdx = 0;
+
+    if (speedBtn) {
+        speedBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            speedIdx = (speedIdx + 1) % speedSteps.length;
+            vids.forEach(function (v) { v.playbackRate = speedSteps[speedIdx]; });
+            speedBtn.textContent = speedLabels[speedIdx];
+        });
+    }
 })();
 </script>
